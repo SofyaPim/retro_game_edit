@@ -4,10 +4,12 @@ import { SmallLaser, BigLaser } from "./laser.js";
 export class Player {
   constructor(game) {
     this.game = game;
-    // this.spriteWidth = 200;
-    //  this.spriteHeight = 200;
-    this.width = 140;
-    this.height = 120;
+    this.spriteWidth = 140;
+     this.spriteHeight = 120;
+   //  this.width = 140;
+   //  this.height = 120;
+    this.width;
+    this.height;
     this.x = this.game.width * 0.5 - this.width * 0.5;
     this.y = this.game.height - this.height;
     this.speed = 5;
@@ -36,8 +38,8 @@ export class Player {
     } else {
       this.frameX = 0;
     }
-    context.drawImage(this.jets_image, this.jetsFrameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
-    context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+    context.drawImage(this.jets_image, this.jetsFrameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width , this.height);
+    context.drawImage(this.image, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
     
    }
    update() {
@@ -67,7 +69,14 @@ export class Player {
   shoot() {
     const projectile = this.game.getProjectile();
     if (projectile) projectile.start(this.x + this.width * 0.5, this.y);
-    
+
+  }
+  resize() {
+    this.width = this.spriteWidth * this.game.ratio;
+    this.height = this.spriteHeight * this.game.ratio;
+    this.x = this.game.width * 0.5 - this.width * 0.5;
+    this.y = this.game.height - this.height;
+    this.lives = 3;
   }
   restart() {
     this.x = this.game.width * 0.5 - this.width * 0.5;
