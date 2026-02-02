@@ -99,6 +99,7 @@ window.addEventListener("load", function () {
       this.largeFont = Math.ceil(75 * this.ratio);
       ctx.font = this.smallFont + "px Impact";
       this.player.restart();
+      this.player.resize();
     }
     render(context, deltaTime) {
        
@@ -201,4 +202,5 @@ window.addEventListener("load", function () {
   }
   animate(0);
 });
+
 
