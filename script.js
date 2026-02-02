@@ -54,18 +54,11 @@ window.addEventListener("load", function () {
       this.handlers = new Handler(this);
 
       this.resize(window.innerWidth, window.innerHeight);
-      this.ammo = document.getElementById("ammo");
+
       this.laser = document.getElementById("laser");
       this.bigLaser = document.getElementById("bigLaser");
 
-      // shooting     
-      this.handleAmmoMouseDown = () => {
-        if (!this.fired) this.player.shoot();
-      };
-      this.handleAmmoTouchStart = (e) => {
-        e.preventDefault();
-        if (!this.fired) this.player.shoot();
-      };
+      // shooting
       this.handleKeyDown = (e) => {
         if (e.key === "1" && !this.fired) this.player.shoot();
         this.fired = true;
@@ -80,12 +73,19 @@ window.addEventListener("load", function () {
         const index = this.keys.indexOf(e.key);
         if (index > -1) this.keys.splice(index, 1);
       };
-      
-      this.ammo.addEventListener("mousedown", this.handleAmmoMouseDown);
-      this.ammo.addEventListener("touchstart", this.handleAmmoTouchStart);
+
       window.addEventListener("keydown", this.handleKeyDown);
       window.addEventListener("keyup", this.handleKeyUp);
     }
+    // destroy() {
+    //   // Удаляем listeners
+    // window.removeEventListener("keydown", this.handleKeyDown);
+    // window.removeEventListener("keyup", this.handleKeyUp);
+
+    // // Очищаем ссылки
+    // this.handleKeyDown = null;
+    // this.handleKeyUp = null;
+    // }
 
     resize(width, height) {
       this.canvas.width = width;
@@ -102,7 +102,6 @@ window.addEventListener("load", function () {
       this.player.resize();
     }
     render(context, deltaTime) {
-       
       this.ui.drawStatusText(context);
       if (this.gameOver) {
         this.ui.drawGameText(context);
@@ -140,8 +139,8 @@ window.addEventListener("load", function () {
         }
       });
       if (this.score >= this.winningScore || this.player.lives <= 0) {
-        this.ui.drawGameText(context);     
-       this.gameOver = true;
+        this.ui.drawGameText(context);
+        this.gameOver = true;
       }
     }
 
@@ -202,5 +201,3 @@ window.addEventListener("load", function () {
   }
   animate(0);
 });
-
-
