@@ -67,8 +67,11 @@ export class Player {
   }
   
   shoot() {
-    const projectile = this.game.getProjectile();
-    if (projectile) projectile.start(this.x + this.width * 0.5, this.y);
+     if(!this.game.gameOver){
+      const projectile = this.game.getProjectile();
+      if (projectile) projectile.start(this.x + this.width * 0.5, this.y);
+
+   }
 
   }
   resize() {
@@ -84,3 +87,4 @@ export class Player {
     this.lives = 3;
   }
 }
+
