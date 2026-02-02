@@ -1,4 +1,3 @@
-
 export class Handler {
   constructor(game) {
     this.game = game;
@@ -6,9 +5,18 @@ export class Handler {
     this.fullScreenBtn = document.getElementById("fullScreenBtn");
     this.arrowLeft = document.getElementById("arrowLeft");
     this.arrowRight = document.getElementById("arrowRight");
+    this.ammo = document.getElementById("ammo");
+
     let leftInterval;
     let rightInterval;
 
+    this.handleAmmoMouseDown = () => {
+      if (!this.game.fired) this.game.player.shoot();
+    };
+    this.handleAmmoTouchStart = (e) => {
+      e.preventDefault();
+      if (!this.game.fired) this.game.player.shoot();
+    };
     this.arrowLeft.addEventListener("mousedown", () => {
       if (leftInterval) clearInterval(leftInterval);
       leftInterval = setInterval(() => {
@@ -63,25 +71,12 @@ export class Handler {
     this.resizeHandler = (e) => {
       this.game.resize(e.target.innerWidth, e.target.innerHeight);
     };
-
+    this.ammo.addEventListener("mousedown", this.handleAmmoMouseDown);
+    this.ammo.addEventListener("touchstart", this.handleAmmoTouchStart);
+   
     this.fullScreenBtn.addEventListener("click", this.fullScreenHandler);
     this.resetBtn.addEventListener("click", this.resetHandler);
     window.addEventListener("resize", this.resizeHandler);
-
-    //  window.addEventListener("keydown", (e) => {
-    //    if (e.key === "1" && !this.game.fired) this.game.player.shoot();
-    //    this.game.fired = true;
-    //    if (this.keys.indexOf(e.key) === -1) this.keys.push(e.key);
-    //    if (e.key === "r" && this.game.gameOver) {
-    //      this.game.restart();
-    //      this.game.gameOver = false;
-    //    }
-    //  });
-    //  window.addEventListener("keyup", (e) => {
-    //    this.game.fired = false;
-    //    const index = this.keys.indexOf(e.key);
-    //    if (index > -1) this.keys.splice(index, 1);
-    //  });
   }
   toggleFullScreen() {
     if (!document.fullscreenElement) {
@@ -91,13 +86,13 @@ export class Handler {
     }
   }
   // на случай выхода из игры
-  destroyListeners() {
-    this.fullScreenBtn.removeEventListener("click", this.fullScreenHandler);
-    this.resetBtn.removeEventListener("click", this.resetHandler);
-    window.removeEventListener("resize", this.resizeHandler);
+  //   destroyListeners() {
+  //     this.fullScreenBtn.removeEventListener("click", this.fullScreenHandler);
+  //     this.resetBtn.removeEventListener("click", this.resetHandler);
+  //     window.removeEventListener("resize", this.resizeHandler);
 
-    this.fullScreenHandler = null;
-    this.resetHandler = null;
-    this.resizeHandler = null;
-  }
+  //     this.fullScreenHandler = null;
+  //     this.resetHandler = null;
+  //     this.resizeHandler = null;
+  //   }
 }
