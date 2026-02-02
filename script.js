@@ -58,17 +58,15 @@ window.addEventListener("load", function () {
       this.laser = document.getElementById("laser");
       this.bigLaser = document.getElementById("bigLaser");
 
-      // shooting
-      this.ammo.addEventListener("mousedown", () => {
+      // shooting     
+      this.handleAmmoMouseDown = () => {
         if (!this.fired) this.player.shoot();
-      });
-
-      this.ammo.addEventListener("touchstart", (у) => {
-          e.preventDefault(); 
+      };
+      this.handleAmmoTouchStart = (e) => {
+        e.preventDefault();
         if (!this.fired) this.player.shoot();
-      });
-
-      window.addEventListener("keydown", (e) => {
+      };
+      this.handleKeyDown = (e) => {
         if (e.key === "1" && !this.fired) this.player.shoot();
         this.fired = true;
         if (this.keys.indexOf(e.key) === -1) this.keys.push(e.key);
@@ -76,12 +74,17 @@ window.addEventListener("load", function () {
           this.restart();
           this.gameOver = false;
         }
-      });
-      window.addEventListener("keyup", (e) => {
+      };
+      this.handleKeyUp = (e) => {
         this.fired = false;
         const index = this.keys.indexOf(e.key);
         if (index > -1) this.keys.splice(index, 1);
-      });
+      };
+      
+      this.ammo.addEventListener("mousedown", this.handleAmmoMouseDown);
+      this.ammo.addEventListener("touchstart", this.handleAmmoTouchStart);
+      window.addEventListener("keydown", this.handleKeyDown);
+      window.addEventListener("keyup", this.handleKeyUp);
     }
 
     resize(width, height) {
@@ -198,3 +201,4 @@ window.addEventListener("load", function () {
   }
   animate(0);
 });
+
