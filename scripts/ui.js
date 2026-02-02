@@ -4,6 +4,7 @@ export class UI {
     this.context = context;
     this.message1;
     this.message2;
+    this.message3;
   }
   drawStatusText(context) {
     context.save();
@@ -43,7 +44,7 @@ export class UI {
     if (this.game.score >= this.game.winningScore) {
       this.message1 = "You win!";
       this.message2 = "Play again press  R";
-     
+    
     } else if (this.game.player.lives <= 0 ) {
       this.message1 = "You lose!";
       this.message2 = "Try again press R";
@@ -51,6 +52,7 @@ export class UI {
     } else {
       this.message1 = "Lets play!";
       this.message2 = "Press R to start!";
+      this.message3 = "Press 1,2,3 and arrow keys on your keyboard to shoot on PC";
     }
     context.save();
     context.textAlign = "center";
@@ -59,8 +61,9 @@ export class UI {
     context.fillText(this.message1, this.game.width * 0.5, this.game.height * 0.5);
     context.font = this.game.smallFont + "px Impact";
     context.fillText(this.message2, this.game.width * 0.5, this.game.height * 0.7);
+    context.font = this.game.smallFont*0.6 + "px Impact";
+    context.fillText(this.message3, this.game.width * 0.5, this.game.height * 0.9);
     context.restore();
   }
   
 }
-
