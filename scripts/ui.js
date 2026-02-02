@@ -43,11 +43,11 @@ export class UI {
     if (this.game.score >= this.game.winningScore) {
       this.message1 = "You win!";
       this.message2 = "Play again press  R";
-      this.game.sound.play(this.game.sound.win);
+     
     } else if (this.game.player.lives <= 0 ) {
       this.message1 = "You lose!";
       this.message2 = "Try again press R";
-      this.game.sound.play(this.game.sound.lose);
+      
     } else {
       this.message1 = "Lets play!";
       this.message2 = "Press R to start!";
@@ -63,3 +63,4 @@ export class UI {
   }
   
 }
+
