@@ -58,12 +58,13 @@ export class UI {
     context.textAlign = "center";
     context.font = this.game.largeFont + "px Impact";
 
-    context.fillText(this.message1, this.game.width * 0.5, this.game.height * 0.5);
+   context.fillText(this.message1, this.game.width * 0.5, this.game.height * 0.4);
     context.font = this.game.smallFont + "px Impact";
-    context.fillText(this.message2, this.game.width * 0.5, this.game.height * 0.7);
+    context.fillText(this.message2, this.game.width * 0.5, this.game.height * 0.5);
     context.font = this.game.smallFont*0.6 + "px Impact";
-    context.fillText(this.message3, this.game.width * 0.5, this.game.height * 0.9);
+    context.fillText(this.message3, this.game.width * 0.5, this.game.height * 0.99);
     context.restore();
   }
   
 }
+
